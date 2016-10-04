@@ -5,12 +5,10 @@ import com.github.javafaker.service.RandomService;
 
 import java.time.Clock;
 import java.time.Duration;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalAdjusters;
 
-class ISODateTime {
+public class ISODateTime {
     public static final int MIN_OFFSET_TO_PAST_AND_FUTURE_MS = 1000;
     private final DateTimeGetter dateTimeGetter;
     private RandomService randomService;

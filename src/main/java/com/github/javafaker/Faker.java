@@ -49,6 +49,7 @@ public class Faker implements Resolver {
     private final Beer beer;
     private final University university;
     private final Cat cat;
+    private final Chemistry chemistry;
 
     public Faker() {
         this(Locale.ENGLISH);
@@ -98,6 +99,7 @@ public class Faker implements Resolver {
         this.beer = new Beer(proxiedFakeValueService);
         this.university = new University(this, proxiedFakeValueService);
         this.cat = new Cat(proxiedFakeValueService);
+        this.chemistry = new Chemistry(fakeValuesService);
     }
 
     private static FakeValuesServiceInterface createProxiedFakeValuesService(FakeValuesServiceInterface fakeValuesServiceInterface,
@@ -290,6 +292,8 @@ public class Faker implements Resolver {
     public Cat cat() {
         return cat;
     }
+
+    public Chemistry chemistry() { return chemistry; }
 
     /**
      * Resolves a key in the format of class.method_name
