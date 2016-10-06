@@ -104,6 +104,7 @@ public class ISODateTimeTest {
         assertFalse(result.isAfter(to));
     }
 
+    @Test
     public void between_earliest() throws Exception {
         when(randomService.nextLong(anyLong())).thenAnswer(inv -> 0L);                  // For oldest value
 
@@ -113,6 +114,7 @@ public class ISODateTimeTest {
         assertTrue(result.isEqual(from));
     }
 
+    @Test
     public void between_latest() throws Exception {
         when(randomService.nextLong(anyLong())).thenAnswer(inv -> inv.getArguments()[0]); // For newest value
 
@@ -120,5 +122,13 @@ public class ISODateTimeTest {
         final ZonedDateTime to  = PRESENT.plus(DATE_RANGE);
         ZonedDateTime result = isoDateTime.between(from, to);
         assertTrue(result.isEqual(to));
+    }
+
+    @Test
+    public void between_same_dates() throws Exception {
+        when(randomService.nextLong(0L)).thenThrow(new IllegalArgumentException()); // For newest value
+
+        ZonedDateTime result = isoDateTime.between(PRESENT, PRESENT);
+        assertTrue(result.isEqual(PRESENT));
     }
 }

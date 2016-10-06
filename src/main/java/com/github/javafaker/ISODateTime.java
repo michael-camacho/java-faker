@@ -61,7 +61,11 @@ public class ISODateTime {
             throw new IllegalArgumentException("Invalid date range, the upper bound date is before the lower bound.");
         }
 
-        final long offsetMillis = randomService.nextLong(Duration.between(from, to).toMillis());
+        final long intervalMillis = Duration.between(from, to).toMillis();
+        if (intervalMillis == 0) {
+            return from; // If the times are the same, nextLong() will throw an Exception
+        }
+        final long offsetMillis = randomService.nextLong(intervalMillis);
         return from.plus(offsetMillis, ChronoUnit.MILLIS);
     }
 
